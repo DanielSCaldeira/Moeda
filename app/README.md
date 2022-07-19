@@ -82,7 +82,7 @@ Environments: variaveis de ambiente.
 
 Pode ser determinado a um componente se ele vai ser visivel para outros módulos ou não.
 
-![alt text](https://github.com/DanielSCaldeira/Moeda/blob/main/app/src/app/imagem/anatomia-modulo.png?raw=true)
+![alt text](https://github.com/DanielSCaldeira/Moeda/blob/main/app/src/app/assets/imagem/anatomia-modulo.png?raw=true)
 
 1. Todo módulo tem 5 atributos para ser configurar são eles DECLARATIONS, EXPORT, IMPORTS, PROVIDERS, BOOTSTRAP
    1.1 DECLARATIONS: São os componentes, diretivas e pipes que fazem parte de determinado módulo.
