@@ -41,3 +41,6 @@ HTML, CSS, TS
 ### Organização dos Módulos
 
 Pode ser determinado a um componente se ele vai ser visivel para outros módulos ou não.
+
+
+![alt text](https://github.com/DanielSCaldeira/Moeda/blob/main/app/src/app/imagem/anatomia-modulo.png?raw=true)
