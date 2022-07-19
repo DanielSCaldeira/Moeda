@@ -25,3 +25,19 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Minhas anotações
+
+### Arvore de inicialização
+
+Main.ts -> AppModule -> AppComponent -> Faz referencias aos componentes criados
+
+Obs: Os componentes em angular são organizados em módulos
+
+### Cada componente possui:
+
+HTML, CSS, TS
+
+### Organização dos Módulos
+
+Pode ser determinado a um componente se ele vai ser visivel para outros módulos ou não.
