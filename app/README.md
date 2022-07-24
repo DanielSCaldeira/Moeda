@@ -181,3 +181,88 @@ Programação reativa tem como conceito de que quando acontecer um evento sejá 
 
 1. Padrão orientado a evento.
 2. Subject fica responsável por identificar o evento ocorrido e avisar os interresados pelo o evento.
+
+### Services
+
+São classes que tem como objetico organizar e compartilhar métodos e dados entre componentes. A classe tem somente uma instancia todos os componentes vão instaciar a mesma classe.
+
+Services são singletons (uma unica instancia) dentro do escopo de um injector
+
+#### Criar Services
+
+ng = cli comand interface angular
+g = genetate
+s = services
+
+```sh
+ng g s services/Product
+ng g s services/<nome da service>
+```
+
+#### Generate
+
+```sh
+@Injectable({
+  providedIn: "root",
+})
+export class ProductService{
+  ///...
+}
+```
+
+#### ProvidedIn: "root"
+
+O root é um alias para o AppModule e como tem somente um AppModule ele vai ser instaciado somente uma unica vez.
+O providedIn pode ser um alias para qualquer modulo que você criar, mas para referenciar a um modulo diferente de root ou seja AppModule,
+deve importar o modulo e passar ele como alias.
+
+```sh
+import { NovoModule } from 'caminho do componente';
+
+@Injectable({
+  providedIn: NovoModule,
+})
+export class ProductService{
+  ///...
+}
+```
+
+#### @Injectable
+
+Quando é atribuido o atributo @injectable a uma classe isso avisa ao angular que essa classe pode ser injetada. Fazendo com que o angular instacie a classe e torne disponivel para ser injetada dentro de uma classe que necessite dessa instancia.
+
+Classe com atributo @Injectable -> Angular framework -> Classe que precisa da instancia
+
+1. Quando é atribuido o @Injectable a uma classe isso quer dizer que essa classe pode ser injetada.
+2. Essa classe com o atributo, informa ao angular que ele deve, instaciar a classe. (A classe está disponivel no framework)
+3. E quando eu necessitar dessa classe em um construtor o angular ira prover a dependecia. (A injeção da classe)
+
+#### Injeção de Dependência
+
+É o padrão no qual a classe recebe as dependêmcias de uma fonte externa ão inves de criar por conta própria.
+
+Sem injeção de dependencias
+
+```sh
+ class Carro{
+  motor: Motor
+
+  constructor(){
+    this.motor = new Motor()
+  }
+}
+```
+
+Com injeção de dependencias
+
+```sh
+ class Carro{
+  motor: Motor
+
+  constructor(motor: Motor){
+    this.motor = motor
+  }
+}
+```
+
+### Injector
