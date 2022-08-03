@@ -3,17 +3,8 @@ import { MoedasService } from './services/moedas.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 
-export interface Moeda {
-  nomeFormatado?: string;
-  simbolo?: string;
-  tipoMoeda?: string;
-}
-
-export interface Cotacao {
-  cotacaoCompra?: number;
-  cotacaoVenda?: number;
-  dataHoraCotacao?: string;
-}
+import { Moeda } from '../app/model/moeda.model';
+import { Cotacao } from './model/cotacao.model';
 
 @Component({
   selector: 'app-root',

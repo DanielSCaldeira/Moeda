@@ -2,19 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { Cotacao } from '../model/cotacao.model';
+import { Moeda } from '../model/moeda.model';
 
 export interface Resultado<Type> {
   value?: Type;
-}
-export interface Moeda {
-  nomeFormatado?: string;
-  simbolo?: string;
-  tipoMoeda?: string;
-}
-export interface Cotacao {
-  cotacaoCompra?: number;
-  cotacaoVenda?: number;
-  dataHoraCotacao?: string;
 }
 
 @Injectable({

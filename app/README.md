@@ -28,6 +28,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Minhas anotações
 
+### Instalação
+
+Instalar plugin alto import no vs code.
+
 ### Criar projeto comandos
 
 ```sh
@@ -99,7 +103,7 @@ Pode ser determinado a um componente se ele vai ser visivel para outros módulos
 import { Componente Importado } from 'caminho do componente';
 
 @NgModule({
-declarations: [Todos os compontentes que você fez ou ira utiliar nesse módulo],
+declarations: [Todos os compontentes que você fez ou ira utiliar nesse módulo(Componentes, diretivas e pipes)],
 imports: [Todos os componetes importados ou sejá dependencias da aplicação],
 providers: [DatePipe],
 bootstrap: [Componente que vai inicializar a aplicação],
@@ -110,6 +114,68 @@ export class AppModule {}
 ### Diretivas
 
 Altera a aparencia e o comportamento de um elemento, componente ou outra diretiva. Diretiva inserida por atributo.
+
+### Criando Diretiva de atributo
+
+Alterando a aparencia do elemento
+
+```sh
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[appRed]'
+})
+
+export class RedDirective {
+  constructor(private el: ElementRef){
+      el.nativeElement.style.color = 'red';
+  }
+
+}
+```
+
+HTML
+
+```sh
+  <div appRed></div>
+```
+
+### Criando Diretiva estrutural
+
+```sh
+import { Directive, ElementRef } from '@angular/core';
+
+@Directive({
+  selector: '[myFor]'
+})
+
+export class ForDirective implements OnInit{
+  # implements pode ser OnChange para ele modificar identificar o que foi modficado "orDirective implements OnChange"
+  # Contrução é nome da diretiva mais o que vem dentro do atributo. Ele vai pegar o valor depois da palavra "Em"
+  @Input('myForEm') numbers: number[]
+
+  constructor(
+    private container: ViewContainerRef,
+    private template: TemplateRef<any>
+  ){}
+
+  ngOnInit(): void{
+      for(let number od this.numbers){
+        #implicit disponibiliza para o front end o valor atual
+        this.container.createEmbeddedView(this.template, {$implicit: number})
+      }
+  }
+
+}
+```
+
+HTML
+
+```sh
+  <ul>
+    <li *myFor="let n em [1,2,3] teste 'gggg'"></li>
+  </ul>
+```
 
 #### Decorator
 
@@ -125,7 +191,7 @@ Exemplo: *ngFor="", \*ngIf=""
 
 #### Property Binding
 
-Para ter uma ligação entre o html e a controller é necessario inserir o atributo [dataSource]="nome da variavel que está na controller".
+Para ter uma ligação entre o html e a controller é necessario inserir o atributo entre colchetes [] -> [dataSource]="nome da variavel que está na controller".
 
 #### Event Binding
 
@@ -145,6 +211,7 @@ Para que o valor sejá atualizado em ambas direçoes controller <-> HTML utlizar
 
 ### Angular Router
 
+Arquivo app-config.modulo.ts
 Tem que fazer o mapeamento da rota/componente.
 Router outlet é um componente que faz pare do componente router e ele é resposável por carregar a opção selecionada pelo o usuário
 
@@ -157,10 +224,19 @@ Exemplo: HTML
 Exemplo: Mapeamento
 
 ```sh
-const routes: Router = [{
-path: "/products",
-component: ProductComponent
-}];
+import {HomeComponent} "caminho"
+import {ProductComponent} "caminho"
+
+const routes: Router = [
+  {
+    path: "", <"" = rota default quando for carregado a pagina>
+    component: HomeComponent
+  },
+    {
+    path: "products",
+    component: ProductComponent
+  },
+];
 ```
 
 ### Angular Pipes
