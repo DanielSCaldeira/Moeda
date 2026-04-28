@@ -1,344 +1,246 @@
-# App
+(# Moeda App - Angular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
+Aplicativo web desenvolvido em Angular para consulta e exibição de cotações de moedas. Este projeto utiliza Angular CLI, Angular Material e segue boas práticas de arquitetura modular, componentização e uso de serviços.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sumário
 
-## Code scaffolding
+- [Visão Geral](#visão-geral)
+- [Requisitos](#requisitos)
+- [Instalação e Configuração](#instalação-e-configuração)
+- [Scripts Úteis](#scripts-úteis)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [Conceitos Angular Utilizados](#conceitos-angular-utilizados)
+  - [Componentes e Módulos](#componentes-e-módulos)
+  - [Diretivas](#diretivas)
+  - [Services e Injeção de Dependência](#services-e-injeção-de-dependência)
+  - [Pipes](#pipes)
+  - [Data Binding](#data-binding)
+  - [Angular Router](#angular-router)
+  - [Programação Reativa (RxJS)](#programação-reativa-rxjs)
+- [Dicas e Boas Práticas](#dicas-e-boas-práticas)
+- [Links Úteis](#links-úteis)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## Visão Geral
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 14.0.6. O objetivo é fornecer uma base sólida para aplicações Angular, com exemplos de organização de módulos, componentes, diretivas, serviços, pipes e integração com Angular Material.
 
-## Running unit tests
+## Requisitos
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Node.js >= 14.x
+- NPM >= 6.x
+- Angular CLI
 
-## Running end-to-end tests
+## Instalação e Configuração
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. **Clone o repositório:**
+   ```sh
+   git clone <url-do-repo>
+   cd Moeda/app
+   ```
+2. **Instale as dependências:**
+   ```sh
+   npm install
+   ```
+3. **(Opcional) Instale o plugin Auto Import no VS Code para facilitar importações.**
 
-## Further help
+4. **Instale o Angular Material:**
+   ```sh
+   ng add @angular/material
+   ```
+   Siga as opções de layout (Dark, Light) conforme desejado.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Scripts Úteis
 
-## Minhas anotações
+- **Iniciar servidor de desenvolvimento:**
+  ```sh
+  ng serve
+  ```
+  Acesse: [http://localhost:4200/](http://localhost:4200/)
 
-### Instalação
+- **Build de produção:**
+  ```sh
+  ng build
+  ```
+  Os artefatos serão gerados em `dist/`.
 
-Instalar plugin alto import no vs code.
+- **Gerar componente:**
+  ```sh
+  ng generate component <caminho/nome>
+  # ou
+  ng g c <caminho/nome>
+  ```
 
-### Criar projeto comandos
+- **Gerar service:**
+  ```sh
+  ng generate service services/<nome>
+  # ou
+  ng g s services/<nome>
+  ```
 
-```sh
-npm install -g @angular/cli
-ng new <nomeprojeto>
-cd <nomeprojeto>
+- **Rodar testes unitários:**
+  ```sh
+  ng test
+  ```
+
+- **Rodar testes end-to-end:**
+  ```sh
+  ng e2e
+  ```
+
+## Estrutura de Pastas
+
+- `src/app/` - Código-fonte principal
+  - `app.component.*` - Componente raiz
+  - `config/` - Serviços de configuração
+  - `model/` - Modelos de dados (interfaces/classes)
+  - `services/` - Serviços (ex: consumo de APIs)
+- `assets/` - Imagens, fontes e arquivos estáticos
+- `environments/` - Variáveis de ambiente
+
+## Conceitos Angular Utilizados
+
+### Componentes e Módulos
+
+O Angular organiza a aplicação em módulos (`NgModule`) e componentes. O fluxo de inicialização padrão é:
+
+```
+main.ts → AppModule → AppComponent → [outros componentes]
 ```
 
-### Instalar Angular Material
+O `AppModule` é o módulo raiz e define:
 
-```sh
-ng add @angular/material
-```
+- **declarations:** Componentes, diretivas e pipes do módulo
+- **imports:** Módulos externos/importados
+- **providers:** Serviços disponíveis
+- **bootstrap:** Componente inicial da aplicação
 
-1. Vai aparecer as opções de layout disponivel.(Dark, light)
-
-### Inicia o projeto http://localhost:4200/
-
-```sh
-ng serve
-```
-
-### Criar um componente
-
-```sh
-ng g c <caminho do arquivo exemplo "components/template/header">
-```
-
-1. g = generate
-2. c = componente
-
-### Arvore de inicialização
-
-Main.ts -> AppModule -> AppComponent -> Faz referencias aos componentes criados
-
-AppComponent
-
-1. bootstrap: Aponta para o componente que vai ser iniciado na aplicação
-
-Obs: Os componentes em angular são organizados em módulos
-
-### Cada componente possui:
-
-HTML, CSS, TS
-
-### Pastas
-
-Assets: imagens, arquivos estaticos e arquivo de fonte
-Environments: variaveis de ambiente.
-
-### Organização usando Módulos
-
-Pode ser determinado a um componente se ele vai ser visivel para outros módulos ou não.
-
-![alt text](https://github.com/DanielSCaldeira/Moeda/blob/main/app/src/assets/imagem/anatomia-modulo.png?raw=true)
-
-1. Todo módulo tem 5 atributos para ser configurar são eles DECLARATIONS, EXPORT, IMPORTS, PROVIDERS, BOOTSTRAP
-   1.1 DECLARATIONS: São os componentes, diretivas e pipes que fazem parte de determinado módulo.
-   1.2 EXPORTS: É um comjunto de elementos que vão ser visivel fora do módulo podemdo ser componentes, diretivas e pipes  
-   1.3 IMPORTS: É utilizado para importar outros módulos como dependencia co seu módulo.
-   1.4 PROVIDERS: Declara os services
-   1.5 BOOTSTRAP: Carrega os componentes que vão ser utilizados no módulo.
-
-2. AppModule importa os módulos criados
-
-3. app.module.ts
-
-```sh
-import { Componente Importado } from 'caminho do componente';
+Exemplo:
+```ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
 
 @NgModule({
-declarations: [Todos os compontentes que você fez ou ira utiliar nesse módulo(Componentes, diretivas e pipes)],
-imports: [Todos os componetes importados ou sejá dependencias da aplicação],
-providers: [DatePipe],
-bootstrap: [Componente que vai inicializar a aplicação],
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
 
+> **Obs:** Componentes são compostos por arquivos `.ts` (lógica), `.html` (template) e `.scss/.css` (estilo).
+
 ### Diretivas
 
-Altera a aparencia e o comportamento de um elemento, componente ou outra diretiva. Diretiva inserida por atributo.
+Diretivas alteram aparência ou comportamento de elementos. Existem:
 
-### Criando Diretiva de atributo
+- **Atributo:** Ex: `[appRed]` altera cor do elemento.
+- **Estrutural:** Ex: `*ngFor`, `*ngIf` alteram o DOM.
 
-Alterando a aparencia do elemento
-
-```sh
-import { Directive, ElementRef } from '@angular/core';
-
-@Directive({
-  selector: '[appRed]'
-})
-
+Exemplo de diretiva de atributo:
+```ts
+@Directive({ selector: '[appRed]' })
 export class RedDirective {
-  constructor(private el: ElementRef){
-      el.nativeElement.style.color = 'red';
+  constructor(private el: ElementRef) {
+    el.nativeElement.style.color = 'red';
   }
-
 }
 ```
-
-HTML
-
-```sh
-  <div appRed></div>
+Uso:
+```html
+<div appRed>Texto vermelho</div>
 ```
 
-### Criando Diretiva estrutural
-
-```sh
-import { Directive, ElementRef } from '@angular/core';
-
-@Directive({
-  selector: '[myFor]'
-})
-
-export class ForDirective implements OnInit{
-  # implements pode ser OnChange para ele modificar identificar o que foi modficado "orDirective implements OnChange"
-  # Contrução é nome da diretiva mais o que vem dentro do atributo. Ele vai pegar o valor depois da palavra "Em"
-  @Input('myForEm') numbers: number[]
-
-  constructor(
-    private container: ViewContainerRef,
-    private template: TemplateRef<any>
-  ){}
-
-  ngOnInit(): void{
-      for(let number od this.numbers){
-        #implicit disponibiliza para o front end o valor atual
-        this.container.createEmbeddedView(this.template, {$implicit: number})
-      }
+Exemplo de diretiva estrutural personalizada:
+```ts
+@Directive({ selector: '[myFor]' })
+export class ForDirective implements OnInit {
+  @Input('myForEm') numbers: number[];
+  constructor(private container: ViewContainerRef, private template: TemplateRef<any>) {}
+  ngOnInit(): void {
+    for (let number of this.numbers) {
+      this.container.createEmbeddedView(this.template, { $implicit: number });
+    }
   }
-
 }
 ```
-
-HTML
-
-```sh
-  <ul>
-    <li *myFor="let n em [1,2,3] teste 'gggg'"></li>
-  </ul>
+Uso:
+```html
+<ul>
+  <li *myFor="let n em [1,2,3]">{{n}}</li>
+</ul>
 ```
 
-#### Decorator
+### Services e Injeção de Dependência
 
-@Directive({selector: 'nome-seletor'})
+Services são classes para lógica de negócio, acesso a dados e compartilhamento de informações entre componentes. São singletons por padrão (escopo do módulo).
 
-### Diretiva Estrutural
-
-Altera o layout adicionando e removendo elementos do DOM.
-A diferença de uma diretiva estrututal por uma diretiva por atributo é o asterisco (*).
-Exemplo: *ngFor="", \*ngIf=""
-
-### Binding
-
-#### Property Binding
-
-Para ter uma ligação entre o html e a controller é necessario inserir o atributo entre colchetes [] -> [dataSource]="nome da variavel que está na controller".
-
-#### Event Binding
-
-Para ligar um evento exemplo de click é necessários os parenteses. Exemplo: (click)="funcao na controller"
-
-#### One Way Data Binding
-
-Pega o valor da variavel que está na controller e mostra no html, tem somente uma unica direção controller -> html. Utiliza o atributo [value]="nome da variavel na controller". Exemplo:
-
-```sh
-<imput [value]="nome"/>
+Exemplo de service:
+```ts
+@Injectable({ providedIn: 'root' })
+export class ProductService { /* ... */ }
 ```
 
-#### Two Way Data Binding
+**Injeção de dependência:**
+```ts
+constructor(private productService: ProductService) {}
+```
 
-Para que o valor sejá atualizado em ambas direçoes controller <-> HTML utlizar [(ngModel)]="nome da variavel na controller"
+### Pipes
+
+Pipes transformam dados em templates. Exemplo:
+```html
+<p>{{ produto.vencimento | date | uppercase }}</p>
+<p>{{ produto.preco | currency:'BRL' }}</p>
+```
+
+### Data Binding
+
+- **Property Binding:** `[value]="nome"`
+- **Event Binding:** `(click)="funcao()"`
+- **Two-way Binding:** `[(ngModel)]="nome"`
 
 ### Angular Router
 
-Arquivo app-config.modulo.ts
-Tem que fazer o mapeamento da rota/componente.
-Router outlet é um componente que faz pare do componente router e ele é resposável por carregar a opção selecionada pelo o usuário
-
-Exemplo: HTML
-
-```sh
-<a routerLink="/products"></a>
-```
-
-Exemplo: Mapeamento
-
-```sh
-import {HomeComponent} "caminho"
-import {ProductComponent} "caminho"
-
-const routes: Router = [
-  {
-    path: "", <"" = rota default quando for carregado a pagina>
-    component: HomeComponent
-  },
-    {
-    path: "products",
-    component: ProductComponent
-  },
+Gerencia navegação entre componentes. Exemplo de configuração:
+```ts
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'products', component: ProductComponent }
 ];
 ```
-
-### Angular Pipes
-
-Pode ter um encadeamento de pipes.
-Exemplo: HTML
-
-```sh
-<p>{{produto.vencimento | date | uppercase }}</p>
-<p>{{produto.preço | currency: 'BRL' }}</p>
+No template:
+```html
+<a routerLink="/products">Produtos</a>
+<router-outlet></router-outlet>
 ```
 
-### Programação Reativas (RXJS)
+### Programação Reativa (RxJS)
 
-Programação reativa tem como conceito de que quando acontecer um evento sejá disparado uma reação e o programa realiza alguma atividade.Tornando assim um programa com menos processamento.
+Utiliza Observables para programação orientada a eventos, facilitando manipulação de streams de dados e assincronismo.
 
-#### Padrão Observer
+---
 
-1. Padrão orientado a evento.
-2. Subject fica responsável por identificar o evento ocorrido e avisar os interresados pelo o evento.
+## Dicas e Boas Práticas
 
-### Services
+- Organize componentes e serviços em módulos.
+- Utilize Angular Material para UI consistente.
+- Prefira Observables para manipulação de dados assíncronos.
+- Separe lógica de apresentação (componentes) da lógica de negócio (services).
+- Utilize pipes para formatação de dados em templates.
 
-São classes que tem como objetico organizar e compartilhar métodos e dados entre componentes. A classe tem somente uma instancia todos os componentes vão instaciar a mesma classe.
+## Links Úteis
 
-Services são singletons (uma unica instancia) dentro do escopo de um injector
+- [Documentação Angular](https://angular.io/docs)
+- [Angular CLI](https://angular.io/cli)
+- [Angular Material](https://material.angular.io/)
+- [RxJS](https://rxjs.dev/)
 
-#### Criar Services
+---
 
-ng = cli comand interface angular
-g = genetate
-s = services
-
-```sh
-ng g s services/Product
-ng g s services/<nome da service>
-```
-
-#### Generate
-
-```sh
-@Injectable({
-  providedIn: "root",
-})
-export class ProductService{
-  ///...
-}
-```
-
-#### ProvidedIn: "root"
-
-O root é um alias para o AppModule e como tem somente um AppModule ele vai ser instaciado somente uma unica vez.
-O providedIn pode ser um alias para qualquer modulo que você criar, mas para referenciar a um modulo diferente de root ou seja AppModule,
-deve importar o modulo e passar ele como alias.
-
-```sh
-import { NovoModule } from 'caminho do componente';
-
-@Injectable({
-  providedIn: NovoModule,
-})
-export class ProductService{
-  ///...
-}
-```
-
-#### @Injectable
-
-Quando é atribuido o atributo @injectable a uma classe isso avisa ao angular que essa classe pode ser injetada. Fazendo com que o angular instacie a classe e torne disponivel para ser injetada dentro de uma classe que necessite dessa instancia.
-
-Classe com atributo @Injectable -> Angular framework -> Classe que precisa da instancia
-
-1. Quando é atribuido o @Injectable a uma classe isso quer dizer que essa classe pode ser injetada.
-2. Essa classe com o atributo, informa ao angular que ele deve, instaciar a classe. (A classe está disponivel no framework)
-3. E quando eu necessitar dessa classe em um construtor o angular ira prover a dependecia. (A injeção da classe)
-
-#### Injeção de Dependência
-
-É o padrão no qual a classe recebe as dependêmcias de uma fonte externa ão inves de criar por conta própria.
-
-Sem injeção de dependencias
-
-```sh
- class Carro{
-  motor: Motor
-
-  constructor(){
-    this.motor = new Motor()
-  }
-}
-```
-
-Com injeção de dependencias
-
-```sh
- class Carro{
-  motor: Motor
-
-  constructor(motor: Motor){
-    this.motor = motor
-  }
-}
-```
-
-### Injector
+> Documentação detalhada e atualizada por um especialista Angular. Para dúvidas, consulte os links acima ou abra uma issue.
