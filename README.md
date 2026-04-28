@@ -1,4 +1,4 @@
-(# Moeda App - Angular)
+# Moeda App - Angular
 
 Aplicativo web desenvolvido em Angular para consulta e exibição de cotações de moedas. Este projeto utiliza Angular CLI, Angular Material e segue boas práticas de arquitetura modular, componentização e uso de serviços.
 
